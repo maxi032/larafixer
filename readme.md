@@ -5,6 +5,16 @@ So first do a <pre>$ composer require florianv/laravel-swap php-http/message php
 
 More details: * <a href="https://github.com/florianv/laravel-swap" target="_blank">here</a>
 
+<pre>// /config/app.php
+'providers' => [
+    Swap\Laravel\SwapServiceProvider::class
+],
+
+'aliases' => [
+    'Swap' => Swap\Laravel\Facades\Swap::class
+]
+</pre>
+
 You will also need to create an account on fixer.io and add the api key on swap.php config file. 
 
 Next generate auth scafolding with <pre>php artisan make:auth</pre>
