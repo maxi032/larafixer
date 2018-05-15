@@ -10,5 +10,5 @@ You will also need to create an account on fixer.io and add the api key on swap.
 Next generate auth scafolding with <pre>php artisan make:auth</pre>
 Migrate db and seed: <pre>php artisan migrate --seed</pre>
 
-Login with the seeded user
-Access <pre>/seed-rates</pre> from your browser to populate a few rated from fixer.io (Please note that only a few of them are available on the free plan)
+Login with the seeded user.
+Access <code>/seed-rates</code> from your browser to populate a few rated from fixer.io (Please note that only a few of them are available on the free plan)
