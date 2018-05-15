@@ -63,7 +63,7 @@ return [
     |
     */
     'services' => [
-        'fixer' => ['access_key' => '73d3bd6b3add85f338181a54e0123ec9'],
+        'fixer' => ['access_key' => 'your key here'],
     ],
 
     /*
