@@ -11,4 +11,4 @@ Next generate auth scafolding with <pre>php artisan make:auth</pre>
 Migrate db and seed: <pre>php artisan migrate --seed</pre>
 
 Login with the seeded user.
-Access <code>/seed-rates</code> from your browser to populate a few rated from fixer.io (Please note that only a few of them are available on the free plan)
+Access <code>/seed-rates</code> from your browser to populate a few rates from fixer.io (Please note that only a few of them are available on the free plan)
