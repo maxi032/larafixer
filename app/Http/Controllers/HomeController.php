@@ -9,12 +9,8 @@ use Illuminate\Http\Request;
 use Exchanger\Exception\ChainException;
 use Exchanger\Exception\Exception as RateException;
 
-
-
-
 class HomeController extends Controller
 {
-
     protected $app;
     protected $service;
     protected $allowedPairs;
@@ -31,7 +27,6 @@ class HomeController extends Controller
         $this->service = $this->app['swap.chain']; // the fixer.io service
 
         $this->allowedPairs = config('app.allowed_currency_pairs');
-
     }
 
     /**
@@ -44,12 +39,6 @@ class HomeController extends Controller
     {
         // get all available currencies for dropdowns
         $currencies = Rate::whereStatus(1)->take(100)->pluck('currency');
-
-      //  dd($currencies);
-
-        $calculate = $this->doConversion(100, 'USD', 'GBP');
-
-
         return view('converterForm',['currencies'=>$currencies]);
     }
 
@@ -63,6 +52,7 @@ class HomeController extends Controller
      * */
     private function doConversion($amount=1,$from = "GBP",$to = "USD") {
         $exchangeRate = Rate::whereStatus(1)->whereCurrency($from)->orWhere('currency',$to)->take(100)->get();
+
         //arrange collection by preffered key to be able to get the corresponding currency
         $exchangeRate = $exchangeRate->keyBy('currency')->all();
 
@@ -107,7 +97,6 @@ class HomeController extends Controller
         echo "<br> ".$cnt." currencies inserted";
     }
 
-
     /**
      * Process the submitted form
      * @param Request $request
@@ -122,7 +111,6 @@ class HomeController extends Controller
         $currencies = Rate::whereStatus(1)->take(100)->pluck('currency');
         $amountResulted = $this->doConversion($amount, $baseCurrency, $targetCurrency);
 
-
         return view('converterForm',
             ['currencies'=>$currencies,
              'baseCurrency'=>$baseCurrency,
@@ -131,8 +119,5 @@ class HomeController extends Controller
              'amountResulted'=>$amountResulted
             ]);
     }
-
-
-
 
 }
