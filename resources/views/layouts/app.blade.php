@@ -75,6 +75,48 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{('https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js')}}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $.ajaxSetup({
+
+                headers: {
+
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+                }
+
+            });
+            console.log('ready');
+        });
+
+        $('.btn-submit').click(function(e){
+            e.preventDefault();
+
+            var baseCurrency = $("select[name=baseCurrency]").val();
+            var targetCurrency = $("select[name=targetCurrency]").val();
+            var amount = $("input[name=amount]").val();
+            var token = $("input[name=token]").val();
+
+            $.ajax({
+                type:'POST',
+                url:'{{ route('processForm') }}',
+                data:{ '_token': token, baseCurrency:baseCurrency, targetCurrency:targetCurrency, amount:amount},
+
+                success:function(data){
+                    console.log(typeof data.result.amountResulted);
+                   if(typeof data.result.amountResulted !== 'undefined' && parseFloat(data.result.amountResulted) > 0) {
+                       $('#amount2').val(data.result.amountResulted);
+                   }
+
+                },error: function(xhr, textStatus, error){
+                    console.log(xhr);
+                    console.log(textStatus);
+                    console.log(error);
+                }
+
+            });
+        });
+    </script>
 </body>
 </html>

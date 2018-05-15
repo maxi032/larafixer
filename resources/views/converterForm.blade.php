@@ -10,7 +10,7 @@
                     <h3 class="mb-0">Convert</h3>
                 </div>
                 <div class="card-body" style="background-color:#00008b; color:#eee;">
-                    <form class="form" role="form" action="{{ route('processForm') }}" autocomplete="off" id="convertorForm" novalidate="" method="POST">
+                    <form class="form" role="form" autocomplete="off" id="convertorForm" novalidate="">
                         {{ csrf_field() }}
                         <div class="form-row">
                             <div class="form-group col-md-6">
@@ -44,7 +44,7 @@
                                 <input type="text" class="form-control" id="amount2" value="{{ ($amountResulted)??''  }}" placeholder="You get">
                             </div>
                         </div>
-                        <button type="submit" name="submit" value="submit" class="btn btn-primary">Convert</button>
+                        <button type="submit" name="submit" value="submit" class="btn btn-primary btn-submit">Convert</button>
                         <a type="button" name="button"  class="btn btn-primary" href="{{ route('home') }}">Back</a>
                     </form>
                 </div>

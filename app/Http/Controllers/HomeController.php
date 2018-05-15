@@ -8,6 +8,7 @@ use App\Rate;
 use Illuminate\Http\Request;
 use Exchanger\Exception\ChainException;
 use Exchanger\Exception\Exception as RateException;
+use Illuminate\Http\Response;
 
 class HomeController extends Controller
 {
@@ -100,24 +101,18 @@ class HomeController extends Controller
     /**
      * Process the submitted form
      * @param Request $request
-     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     * @return Response
      * */
     public function processForm(Request $request){
         $baseCurrency = $request->input('baseCurrency');
         $targetCurrency = $request->input('targetCurrency');
         $amount = $request->input('amount');
 
-        // get all available currencies for dropdowns
-        $currencies = Rate::whereStatus(1)->take(100)->pluck('currency');
         $amountResulted = $this->doConversion($amount, $baseCurrency, $targetCurrency);
 
-        return view('converterForm',
-            ['currencies'=>$currencies,
-             'baseCurrency'=>$baseCurrency,
-             'targetCurrency'=>$targetCurrency,
-             'amount'=>$amount,
-             'amountResulted'=>$amountResulted
-            ]);
+        return response()->json(['result'=>[
+            'amountResulted'=>$amountResulted
+        ]]);
     }
 
 }
